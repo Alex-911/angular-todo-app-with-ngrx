@@ -1,0 +1,113 @@
+<div
+  class="h-screen w-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center p-4"
+>
+  <div
+    class="bg-gray-100 rounded-2xl p-4 flex flex-col items-stretch justify-start h-full w-full lg:w-1/2 lg:h-3/4 shadow-xl"
+  >
+    <h1 class="text-4xl my-5 text-center font-bold">Todo App</h1>
+
+    <!-- Form -->
+
+    <form
+      [formGroup]="todoForm"
+      class="flex items-center justify-center space-x-0"
+      (ngSubmit)="add()"
+    >
+      <input
+        type="text"
+        placeholder="What's Todays Todo?"
+        class="bg-gray-200 font-semibold text-gray-900 placeholder-gray-800 rounded-l-xl border-none focus:outline-none focus:ring-0 focus:ring-offset-0 shadow-xl"
+        formControlName="title"
+      />
+      <button
+        type="submit"
+        class="bg-green-400 rounded-r-xl h-10 w-16 text-gray-50 flex items-center justify-center shadow-xl focus:outline-none"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          class="w-8"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
+        </svg>
+      </button>
+    </form>
+
+    <!-- TODO List -->
+
+    <div
+      class="flex flex-col items-stretch justify-start space-y-2 bg-gray-200 h-full rounded-xl mt-5 p-4 overflow-scroll relative"
+    >
+      <!-- todos -->
+      <div
+        class="flex items-center justify-between p-2 shadow-lg rounded-xl bg-gray-100"
+        *ngFor="let todo of todoService.getTodos() | async"
+      >
+        <button
+          class="focus:outline-none text-green-500"
+          (click)="update(todo)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-5"
+          >
+            <path
+              *ngIf="!todo.completed"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+            <path
+              *ngIf="!todo.completed"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"
+            />
+
+            <path
+              *ngIf="todo.completed"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+            />
+          </svg>
+        </button>
+
+        <p class="font-semibold text-lg w-full text-left ml-5">
+          {{ todo.title }}
+        </p>
+
+        <button class="text-red-500 focus:outline-none" (click)="delete(todo)">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </button>
+      </div>
+      <!-- Todo End -->
+    </div>
+  </div>
+</div>
