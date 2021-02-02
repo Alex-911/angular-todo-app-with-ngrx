@@ -132,6 +132,7 @@
   },
   "defaultProject": "todo-app",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@ngrx/schematics"
   }
 }

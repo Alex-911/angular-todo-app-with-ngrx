@@ -48,7 +48,7 @@
       <!-- todos -->
       <div
         class="flex items-center justify-between p-2 shadow-lg rounded-xl bg-gray-100"
-        *ngFor="let todo of todoService.getTodos() | async"
+        *ngFor="let todo of todos | async"
       >
         <button
           class="focus:outline-none text-green-500"

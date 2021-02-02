@@ -14,21 +14,27 @@ export class TodoService {
     return of(this.todos);
   }
 
-  addTodo(title: string): void {
+  async addTodo(title: string): Promise<void> {
     const newTodo: Todo = {
       id: this.todos.length,
       title: title,
       completed: false,
     };
 
-    this.todos.push(newTodo);
+    this.todos = [...this.todos, newTodo];
   }
 
-  updateTodo(id: number): void {
-    this.todos[id].completed = !this.todos[id].completed;
+  async updateTodo(id: number): Promise<void> {
+    this.todos = this.todos.map((val) => {
+      if (val.id === id) {
+        return { ...val, completed: !val.completed };
+      } else {
+        return val;
+      }
+    });
   }
 
-  deleteTodo(id: number): void {
+  async deleteTodo(id: number): Promise<void> {
     this.todos = this.todos.filter((val) => val.id !== id);
   }
 }
