@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -29,8 +29,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private todoStore: Store<TodoState>,
-    private change: ChangeDetectorRef
+    private todoStore: Store<TodoState>
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +39,6 @@ export class AppComponent implements OnInit {
     });
 
     this.todos = this.todoStore.select(getTodos);
-    this.todos.subscribe((todos) => this.change.detectChanges());
   }
 
   add() {
